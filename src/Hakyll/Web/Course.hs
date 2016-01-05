@@ -1,6 +1,11 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Hakyll.Web.Course where
+-- | XXX comment me
+
+module Hakyll.Web.Course
+       ( standardRules, createIndex
+       )
+       where
 
 import           Data.Monoid ((<>))
 import           Hakyll
@@ -29,13 +34,15 @@ indexCompiler sectionNames = do
        <> listField "sections" defaultContext (mapM sectionCompiler sectionNames)
        <> defaultContext
 
+-- | XXX comment me
 createIndex :: [String] -> Rules ()
 createIndex sections = create ["index.html"] $ do
   route idRoute
   compile $ indexCompiler sections
 
-standardRules :: Rules ()
-standardRules = do
+-- | XXX comment me
+standardRules :: [Pattern] -> Rules ()
+standardRules staticContent = do
     match "css/*" $ do
       route idRoute
       compile compressCssCompiler
@@ -44,3 +51,10 @@ standardRules = do
 
     match "*.md" $ compile pandocCompiler
 
+    matchAny staticContent $ do
+      route idRoute
+      compile copyFileCompiler
+
+  where
+    matchAny :: [Pattern] -> Rules () -> Rules ()
+    matchAny pats rules = mapM_ (`match` rules) pats
