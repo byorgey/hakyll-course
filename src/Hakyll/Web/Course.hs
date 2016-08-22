@@ -2,10 +2,7 @@
 
 -- | XXX comment me
 
-module Hakyll.Web.Course
-       ( standardRules, createIndex
-       )
-       where
+module Hakyll.Web.Course where
 
 import           Data.Monoid ((<>))
 import           Hakyll
