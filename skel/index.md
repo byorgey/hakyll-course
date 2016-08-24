@@ -1,5 +1,5 @@
 ---
-title: CSCI XXX: YYY (Fall 20ZZ)
+title: "CSCI XXX: YYY (Fall 20ZZ)"
 ---
 CSCI XXX: YYY (F'ZZ)
 =======================================
